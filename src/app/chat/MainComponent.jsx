@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import ChatComponent from "./ChatComponent";
-import ModalComponent from "./ModalComponent";
+import ModalComponent from "../../components/ModalComponent";
 import Image from "next/image";
+import LoadPostModal from "./modals/LoadPostModal";
 
 export default function MainComponent() {
   let [isOpen, setIsOpen] = useState(false);
@@ -93,6 +94,7 @@ export default function MainComponent() {
                       setIsOpen(true)
                       }}>
                   <Image
+                    draggable="false"
                     priority
                     src="/svg/TelegramIcon.svg"
                     height={15}
@@ -104,6 +106,7 @@ export default function MainComponent() {
                       setIsOpen(true)
                       }}>
                   <Image
+                    draggable="false"
                     priority
                     src="/svg/InstagramIcon.svg"
                     height={15}
@@ -115,6 +118,7 @@ export default function MainComponent() {
                       setIsOpen(true)
                       }}>
                     <Image
+                    draggable="false"
                     priority
                     src="/svg/VkIcon.svg"
                     height={15}
@@ -188,63 +192,7 @@ export default function MainComponent() {
           <ChatComponent />
         </div>
       </div>
-
-      <ModalComponent isOpen={isOpen} setIsOpen={setIsOpen}>
-      <div className="px-4 flex mx-2 mb-2">
-              <div className="flex space-x-2">
-            <Image
-              priority
-              src={`/svg/${webType}Icon.svg`}
-              height={15}
-              width={15}
-            />
-            <p className="text-[#989898]">{webType}</p>
-              </div>
-            <p className="mx-auto text-[14px] font-light align-text-bottom">
-              Вставьте ссылку или воспользуйтесь поиском:
-            </p>
-            <button className="ml-auto" onClick={() => setIsOpen(false)}>
-              <Image
-                priority
-                src="/svg/CloseButton.svg"
-                height={15}
-                width={15}
-              />
-            </button>
-          </div>
-          <hr className="w-full h-[0.4px] mt-2 mb-4 bg-[#494949] border-0" />
-          <div className="flex space-x-4 justify-center px-6">
-            <input
-              className="w-full py-2 px-3 placeholder:text-[#494949] text-[#494949] placeholder:text-opacity-50 text-opacity-50 placeholder:font-light bg-[#ECECEC] h-8 rounded-lg text-sm border-solid border-b border-t border-r border-l border-[#494949]"
-              placeholder="Ссылка или название источника"
-            />
-            <button>
-              <Image
-                priority
-                src="/svg/SearchIcon.svg"
-                height={20}
-                width={20}
-              />
-            </button>
-          </div>
-
-          <hr className="w-full h-[0.4px] mt-4 bg-[#494949] border-0" />
-        
-        <div className="flex mx-6 pt-4">
-            <button className="flex space-x-2">
-        <Image
-                priority
-                src="/svg/HistoryButton.svg"
-                height={20}
-                width={20}
-              />
-            <p className="text-sm text-[#989898] underline underline-offset-4">История запросов</p>
-            </button>
-        </div>
-          <hr className="w-full h-[0.4px] mt-4 bg-[#494949] border-0" />
-      </ModalComponent>
-
-
+      <LoadPostModal isOpen={isOpen} setIsOpen={setIsOpen} webType={webType}/>
     </div>
   );
 }
